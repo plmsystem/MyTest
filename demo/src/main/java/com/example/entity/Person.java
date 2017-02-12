@@ -2,11 +2,14 @@ package com.example.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.xml.crypto.Data;
 
 @Entity
 public class Person {
+	
+	public enum GENDER {MALE, FEMALE}; 
 
 	@Id 
 	String id;
@@ -18,7 +21,8 @@ public class Person {
 	String description;
 	
 	@Column(length=10) 
-	String gender;
+	@Enumerated(EnumType.STRING)
+	GENDER gender;
 	
 	@Column 
 	int age;
@@ -47,11 +51,11 @@ public class Person {
 		this.description = description;
 	}
 
-	public String getGender() {
+	public GENDER getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(GENDER gender) {
 		this.gender = gender;
 	}
 
