@@ -1,17 +1,24 @@
 package com.example.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Person {
 	
 	public enum GENDER {MALE, FEMALE}; 
 
-	@Id 
+	@Id
+	@Column(updatable=false)
 	String id;
 	
 	@Column(length=100) 
@@ -27,6 +34,42 @@ public class Person {
 	@Column 
 	int age;
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="CREATIED_DATE")
+	Date createdDate;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="MODIFIED_DATE")
+	Date modifiedDate;
+	
+	@PrePersist
+	void onCreate() {
+		Date date = new Date();
+		this.setCreatedDate(date);
+		this.setModifiedDate(date);
+	}
+
+	@PreUpdate
+	void onPersist() {
+		this.setModifiedDate(new Date());
+	}
+	
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	private void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+
+	private void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+
 	public String getId() {
 		return id;
 	}
