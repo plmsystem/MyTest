@@ -44,7 +44,7 @@
             <artifactId>ojdbc14</artifactId> 
             <version>0.0.1</version> 
             <scope>system</scope>
-            <systemPath>C:/Users/jem/.m2/repository/ojdbc14.jar</systemPath>
+            <systemPath>${project.basedir}/lib/ojdbc14.jar</systemPath>
         </dependency> 
 	</dependencies>
 
