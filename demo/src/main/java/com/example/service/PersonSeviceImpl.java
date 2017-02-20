@@ -19,9 +19,15 @@ public class PersonSeviceImpl implements PersonService {
 	public void addPerson(Person person) {
 		this.personRepository.save(person);
 	}
+	
+	@Override
+	public void updatePerson(Person person) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
-	public List<Person> retrivePersion() {
+	public List<Person> retrivePersionAll() {
 		return this.personRepository.findAll();
 	}
 
