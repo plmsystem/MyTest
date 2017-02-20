@@ -16,8 +16,13 @@ public class PersonSeviceImpl implements PersonService {
 	PersonRepository personRepository;
 
 	@Override
-	public void addPerson(Person person) {
+	public String addPerson(Person person) {
+		if (this.personRepository.exists(person.getId())){
+			return person.getId() + " already exists.";
+		}
+		
 		this.personRepository.save(person);
+		return "OK";
 	}
 	
 	@Override
@@ -27,7 +32,6 @@ public class PersonSeviceImpl implements PersonService {
 		}
 		
 		this.personRepository.save(person);
-		
 		return "OK";
 	}
 
@@ -39,6 +43,16 @@ public class PersonSeviceImpl implements PersonService {
 	@Override
 	public Person getPersion(String id) {
 		return this.personRepository.findOne(id);
+	}
+
+	@Override
+	public String deletePerson(Person person) {
+		if (!this.personRepository.exists(person.getId())){
+			return person.getId() + " does not exists.";
+		}
+		
+		this.personRepository.delete(person);
+		return "OK";
 	}
 
 }

@@ -19,8 +19,7 @@ public class PersonController {
 
 	@RequestMapping(method=RequestMethod.POST)
 	public String addPerson(Person person){
-		this.personService.addPerson(person);
-		return "OK";
+		return this.personService.addPerson(person);
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT)
