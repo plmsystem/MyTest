@@ -25,8 +25,7 @@ public class PersonController {
 	
 	@RequestMapping(method=RequestMethod.PUT)
 	public String updatePerson(Person person){
-		this.personService.updatePerson(person);
-		return "OK";
+		return this.personService.updatePerson(person);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)

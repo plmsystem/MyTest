@@ -21,9 +21,14 @@ public class PersonSeviceImpl implements PersonService {
 	}
 	
 	@Override
-	public void updatePerson(Person person) {
-		// TODO Auto-generated method stub
+	public String updatePerson(Person person) {
+		if (!this.personRepository.exists(person.getId())){
+			return person.getId() + " does not exists.";
+		}
 		
+		this.personRepository.save(person);
+		
+		return "OK";
 	}
 
 	@Override

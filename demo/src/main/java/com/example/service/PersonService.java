@@ -8,7 +8,7 @@ public interface PersonService {
 
 	public void addPerson(Person person);
 	
-	public void updatePerson(Person person);
+	public String updatePerson(Person person);
 	
 	public List<Person> retrivePersionAll();
 	
