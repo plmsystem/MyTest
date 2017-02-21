@@ -10,9 +10,12 @@ public interface PersonService {
 	
 	public String updatePerson(Person person);
 	
-	public List<Person> retrivePersionAll();
+	public String deletePerson(Person person);
 	
 	public Person getPersion(String id);
 	
-	public String deletePerson(Person person);
+	public List<Person> retrivePersonAll();
+	
+	public List<Person> retrivePerson(String name);
+	
 }

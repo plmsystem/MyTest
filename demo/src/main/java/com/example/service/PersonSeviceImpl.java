@@ -17,7 +17,7 @@ public class PersonSeviceImpl implements PersonService {
 
 	@Override
 	public String addPerson(Person person) {
-		if (this.personRepository.exists(person.getId())){
+		if (this.personRepository.findById(person.getId()) != null){
 			return person.getId() + " already exists.";
 		}
 		
@@ -27,7 +27,7 @@ public class PersonSeviceImpl implements PersonService {
 	
 	@Override
 	public String updatePerson(Person person) {
-		if (!this.personRepository.exists(person.getId())){
+		if (!this.personRepository.exists(person.getOid())){
 			return person.getId() + " does not exists.";
 		}
 		
@@ -36,23 +36,29 @@ public class PersonSeviceImpl implements PersonService {
 	}
 
 	@Override
-	public List<Person> retrivePersionAll() {
-		return this.personRepository.findAll();
-	}
-
-	@Override
 	public Person getPersion(String id) {
-		return this.personRepository.findOne(id);
+		return this.personRepository.findById(id);
 	}
 
 	@Override
 	public String deletePerson(Person person) {
-		if (!this.personRepository.exists(person.getId())){
+		if (!this.personRepository.exists(person.getOid())){
 			return person.getId() + " does not exists.";
 		}
 		
 		this.personRepository.delete(person);
 		return "OK";
+	}
+
+	@Override
+	public List<Person> retrivePersonAll() {
+		return this.personRepository.findAll();
+	}
+
+	@Override
+	public List<Person> retrivePerson(String name) {
+		name += "%";
+		return this.personRepository.findByNameLike(name);
 	}
 
 }

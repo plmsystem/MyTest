@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -16,13 +18,20 @@ import javax.persistence.TemporalType;
 public class Person {
 	
 	public enum GENDER {MALE, FEMALE}; 
-
-	@Id
-	@Column(updatable=false)
-	String id;
 	
+	@Id
+	@Column
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	long oid;
+
+	@Column(unique=true)
+	String id;
+
 	@Column(length=100) 
 	String pass;
+	
+	@Column
+	String name;
 	
 	@Column(length=4000) 
 	String description;
@@ -69,6 +78,14 @@ public class Person {
 	private void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
+	
+	public long getOid() {
+		return oid;
+	}
+	
+	public void setOid(long oid){
+		this.oid = oid;
+	}
 
 	public String getId() {
 		return id;
@@ -109,4 +126,13 @@ public class Person {
 	public void setAge(int age) {
 		this.age = age;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }

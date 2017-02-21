@@ -29,11 +29,16 @@ public class PersonController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public List<Person> retrievePersonAll(){
-		return this.personService.retrivePersionAll();
+		return this.personService.retrivePersonAll();
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public Person getPerson(@PathVariable String id){
 		return this.personService.getPersion(id);
+	}
+	
+	@RequestMapping(value="/find/{name}", method=RequestMethod.GET)
+	public List<Person> retrievePerson(@PathVariable String name){
+		return this.personService.retrivePerson(name);
 	}
 }
