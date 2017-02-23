@@ -1,5 +1,7 @@
 package com.example.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +54,12 @@ public class PersonSeviceImpl implements PersonService {
 
 	@Override
 	public List<Person> retrivePersonAll() {
-		return this.personRepository.findAll();
+		Iterable<Person> it = this.personRepository.findAll();
+		Iterator<Person> i = it.iterator();
+		List<Person> listPerson = new ArrayList<Person>();
+		while(i.hasNext()) listPerson.add(i.next());
+		
+		return listPerson;
 	}
 
 	@Override
