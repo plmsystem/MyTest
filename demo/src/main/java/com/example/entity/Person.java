@@ -14,6 +14,8 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Person {
 	
@@ -24,9 +26,10 @@ public class Person {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	long oid;
 
-	@Column(unique=true)
+	@Column(unique=true, updatable=false)
 	String id;
 
+	@JsonIgnore
 	@Column(length=100) 
 	String pass;
 	
@@ -44,7 +47,7 @@ public class Person {
 	int age;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="CREATIED_DATE")
+	@Column(name="CREATIED_DATE", updatable=false)
 	Date createdDate;
 	
 	@Temporal(TemporalType.TIMESTAMP)
