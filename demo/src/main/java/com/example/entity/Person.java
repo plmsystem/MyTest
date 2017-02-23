@@ -16,7 +16,10 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class Person {
 	
 	public enum GENDER {MALE, FEMALE}; 
@@ -57,85 +60,12 @@ public class Person {
 	@PrePersist
 	void onCreate() {
 		Date date = new Date();
-		this.setCreatedDate(date);
-		this.setModifiedDate(date);
+		this.createdDate = date;
+		this.modifiedDate = date;
 	}
 
 	@PreUpdate
 	void onPersist() {
-		this.setModifiedDate(new Date());
+		this.modifiedDate = new Date();
 	}
-	
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-	private void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
-
-	private void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
-	
-	public long getOid() {
-		return oid;
-	}
-	
-	public void setOid(long oid){
-		this.oid = oid;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getPass() {
-		return pass;
-	}
-
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public GENDER getGender() {
-		return gender;
-	}
-
-	public void setGender(GENDER gender) {
-		this.gender = gender;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	
 }
